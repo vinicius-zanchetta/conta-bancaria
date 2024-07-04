@@ -44,7 +44,7 @@ export class Conta {
         console.log("Agência: " + this._agencia);
         console.log("Tipo da Conta: " + tipo);
         console.log("Saldo: " + this._saldo.toFixed(2));
-        console.log("*****************************************************\n");
+        // console.log("*****************************************************\n");
     }
 
     constructor(numero: number, agencia: number, tipo: number, titular: string, saldo: number) {
@@ -87,11 +87,11 @@ export class Conta {
         this._titular = value;
     }
     
-    public get saldo_1(): number {
+    public get saldo(): number {
         return this._saldo;
     }
     
-    public set saldo_1(value: number) {
+    public set saldo(value: number) {
         this._saldo = value;
     }
 }

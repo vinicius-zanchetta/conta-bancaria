@@ -1,16 +1,27 @@
 import * as leia from "readline-sync"
 import { colors } from "./src/util/Colors"
 import { Conta } from "./src/model/Conta";
+import { ContaCorrente } from "./src/model/ContaCorrente";
+import { ContaPoupanca } from "./src/model/ContaPoupanca";
 
 export function main() {
     let opcao: number;
-    const conta1: Conta = new Conta(1, 1, 1, "Vinicius", 10);
-    const conta2: Conta = new Conta(2, 2, 2, "Pierre", 1000);
-    conta1.sacar(100);
-    conta1.depositar(90.5);
-    conta1.sacar(100);
-    conta1.visualizar();
-    conta2.visualizar();
+    
+    // Novas instâncias da classe Conta Corrente
+    const cc1: ContaCorrente = new ContaCorrente(1, 1, 1, "Vinicius", 1000, 500);
+    const cc2: ContaCorrente = new ContaCorrente(2, 1, 1, "Vinicius", 10, 100);
+    cc1.sacar(1500);
+    cc1.depositar(90.5);
+    cc1.sacar(1500);
+    cc1.visualizar();
+    // cc2.visualizar();
+
+    // Novas instâncias da classe Conta Poupança
+    const cc3: ContaPoupanca = new ContaPoupanca(3, 2, 2, "Isabela", 1000, 9);
+    const cc4: ContaPoupanca = new ContaPoupanca(4, 2, 2, "Rafael", 1000, 25);
+    cc3.visualizar();
+    // cc4.visualizar();
+
     console.log(colors.bg.black, colors.fg.yellow);
     console.log("*****************************************************")
     console.log("")
