@@ -26,37 +26,13 @@ export class ContaCorrente extends Conta {
 
         console.log(`Saldo Insuficiente! \nSaldo Atual: R$${this.saldo.toFixed(2)} - Limite Atual: R$${this._limite}\n`);
         return false;
-
-
     }
 
-
-    /**
-     * Getter limite
-     * @return {number}
-     */
     public get limite(): number {
         return this._limite;
     }
 
-    /**
-     * Setter limite
-     * @param {number} value
-     */
     public set limite(value: number) {
         this._limite = value;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
