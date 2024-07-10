@@ -6,7 +6,7 @@ import { ContaPoupanca } from "./src/model/ContaPoupanca";
 import { ContaController } from "./src/controller/ContaController";
 
 export function main() {
-    let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+    let opcao, numero, agencia, tipo, saldo, limite, aniversario, valor, numeroDestino: number;
     let titular: string;
     const tipoContas = ["Conta Corrente", "Conta Poupanca"];
 
@@ -106,18 +106,23 @@ export function main() {
                 contas.deletar(numero);
                 break;
             case 6:
-
-                keyPress();
+                numero = leia.questionInt("Digite o numero da conta: ");
+                valor = leia.questionFloat("Digite o valor que deseja sacar: ");
+                contas.sacar(numero, valor);
                 break;
             case 7:
-
-                keyPress();
+                numero = leia.questionInt("Digite o numero da conta: ");
+                valor = leia.questionFloat("Digite o valor que deseja depositar: ");
+                contas.depositar(numero, valor);
                 break;
             case 8:
-
-                keyPress();
+                numero = leia.questionInt("Digite o numero da Conta de Origem: ");
+                numeroDestino = leia.questionInt("Digite o numero da Conta de Destino: ");
+                valor = leia.questionFloat("Digite o valor que sera transferido: ");
+                contas.transferir(numero, numeroDestino, valor);
                 break;
             case 9:
+                keyPress();
                 process.exit(0);
         }
     }

@@ -6,22 +6,15 @@ export abstract class Conta {
     private _saldo: number;
 
     public sacar(valor: number): boolean {
-        console.log(`Titular: ${this._titular} - Operação Selecionada: Sacar R$${valor.toFixed(2)}`);
         if (this._saldo < valor) {
-            console.log(`Saldo Insuficiente! Saldo Atual: R$${this._saldo.toFixed(2)}\n`);
             return false;
         }
         this._saldo = this._saldo - valor;
-        console.log(`Saque de R$${valor.toFixed(2)}`);
-        console.log(`Saldo da Conta Atual: R$${this._saldo.toFixed(2)}\n`);
         return true;
     }
-
     
     public depositar(valor: number): void {
-        console.log(`Titular: ${this._titular} - Operação Selecionada: Depositar R$${valor.toFixed(2)}`);
         this._saldo = this._saldo + valor;
-        console.log(`Saldo da Conta Atual: R$${this._saldo.toFixed(2)}\n`);
     }
 
     public visualizar(): void {
