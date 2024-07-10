@@ -3,7 +3,6 @@ import { ContaRepository } from "../repository/ContaRepository";
 
 export class ContaController implements ContaRepository {
     private listaContas: Array<Conta> = new Array<Conta>();
-    // Controlar os números das contas
     public numero: number = 0;
 
     cadastrar(conta: Conta): void {
@@ -12,9 +11,6 @@ export class ContaController implements ContaRepository {
     }
 
     listarTodas(): void {
-        // for (let conta of this.listaContas) {
-        //     conta.visualizar();
-        // }
         this.listaContas.forEach(c => c.visualizar());
     }
 
@@ -84,6 +80,16 @@ export class ContaController implements ContaRepository {
         }
     }
 
+    procurarPorTitular(nome: string): void {
+        let buscaPorTitular = this.listaContas.filter(c => c.titular.includes(nome))
+        if (buscaPorTitular) {
+            buscaPorTitular.forEach(c => c.visualizar());
+            return
+        }
+        console.log("Não foi encontrado ninguém com esse nome!");
+        
+    }
+
     // métodos auxiliares
     public gerarNumero(): number {
         return ++this.numero;
@@ -97,5 +103,4 @@ export class ContaController implements ContaRepository {
         }
         return null;
     }
-
 }

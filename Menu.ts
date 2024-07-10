@@ -16,7 +16,7 @@ export function main() {
     contas.cadastrar(new ContaCorrente(contas.gerarNumero(), 1, 1, "Vinicius", 1000, 500));
     contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), 2, 2, "Isabela", 1000, 9));
 
-    console.log(colors.bg.black, colors.fg.yellow);
+    console.log(colors.bg.black, colors.fg.whitestrong);
     console.log("*****************************************************")
     console.log("")
     console.log("\t\tBANCO DO BRAZIL COM Z")
@@ -29,17 +29,14 @@ export function main() {
     console.log("\t6 - Sacar")
     console.log("\t7 - Depositar")
     console.log("\t8 - Transferir valores entre contas")
-    console.log("\t9 - Sair\n")
+    console.log("\t9 - Buscar por titular")
+    console.log("\t10 - Sair\n")
     console.log("****************************************************")
 
     while (true) {
         opcao = leia.questionInt("Entre com a opcao desejada: ")
         switch (opcao) {
             case 1:
-                console.log(colors.fg.whitestrong);
-                // console.log("Digite o Número da Conta: ");
-                // numero = leia.questionInt();
-
                 console.log("Digite o Número da Agência: ");
                 agencia = leia.questionInt();
 
@@ -122,7 +119,11 @@ export function main() {
                 contas.transferir(numero, numeroDestino, valor);
                 break;
             case 9:
-                keyPress();
+                titular = leia.question("Digite o nome do titular buscado: ")
+                contas.procurarPorTitular(titular);
+                break;
+            case 10:
+                console.log(colors.reset, "");
                 process.exit(0);
         }
     }
