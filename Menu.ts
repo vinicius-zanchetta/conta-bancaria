@@ -13,19 +13,8 @@ export function main() {
     const contas: ContaController = new ContaController();
 
     // // Novas instâncias da classe Conta Corrente
-    // const cc1: ContaCorrente = new ContaCorrente(1, 1, 1, "Vinicius", 1000, 500);
-    // const cc2: ContaCorrente = new ContaCorrente(2, 1, 1, "Vinicius", 10, 100);
-    // cc1.sacar(1500);
-    // cc1.depositar(90.5);
-    // cc1.sacar(1500);
-    // cc1.visualizar();
-    // // cc2.visualizar();
-
-    // // Novas instâncias da classe Conta Poupança
-    // const cc3: ContaPoupanca = new ContaPoupanca(3, 2, 2, "Isabela", 1000, 9);
-    // const cc4: ContaPoupanca = new ContaPoupanca(4, 2, 2, "Rafael", 1000, 25);
-    // cc3.visualizar();
-    // // cc4.visualizar();
+    contas.cadastrar(new ContaCorrente(contas.gerarNumero(), 1, 1, "Vinicius", 1000, 500));
+    contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), 2, 2, "Isabela", 1000, 9));
 
     console.log(colors.bg.black, colors.fg.yellow);
     console.log("*****************************************************")
@@ -42,7 +31,7 @@ export function main() {
     console.log("\t8 - Transferir valores entre contas")
     console.log("\t9 - Sair\n")
     console.log("****************************************************")
-    
+
     while (true) {
         opcao = leia.questionInt("Entre com a opcao desejada: ")
         switch (opcao) {
@@ -68,7 +57,7 @@ export function main() {
                     limite = leia.questionFloat();
                     let conta: Conta = new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite)
                     contas.cadastrar(conta);
-                    
+
                 } else {
                     console.log("Digite a Data de Aniversário da Conta:");
                     aniversario = leia.questionInt();
@@ -83,12 +72,38 @@ export function main() {
                 contas.procurarPorNumero(numero);
                 break;
             case 4:
+                console.log("Digite o Número da Conta a ser atualizada: ");
+                numero = leia.questionInt();
 
-                keyPress();
+                let conta = contas.buscarNoArray(numero);
+
+                if (conta == null) {
+                    console.log(`Conta de número ${numero} não foi encontrada.`);
+                    return;
+                }
+
+                console.log("Digite o Número da Agência a ser atualizada: ");
+                agencia = leia.questionInt();
+
+                console.log("Digite o Nome do Titular da Conta a ser atualizada: ");
+                titular = leia.question();
+
+                console.log("Digite o Saldo da Conta: ");
+                saldo = leia.questionFloat();
+
+                if (conta.tipo == 1) {
+                    console.log("Digite o Limite da Conta a ser atualizada: ");
+                    limite = leia.questionFloat();
+                    contas.atualizar(new ContaCorrente(numero, agencia, conta.tipo, titular, saldo, limite));
+                } else {
+                    console.log("Digite a Data de Aniversário da Conta a ser atualizada: ");
+                    aniversario = leia.questionInt();
+                    contas.atualizar(new ContaPoupanca(numero, agencia, conta.tipo, titular, saldo, aniversario));
+                }
                 break;
             case 5:
-
-                keyPress();
+                numero = leia.questionInt("Digite o numero da conta que voce deseja excluir: ");
+                contas.deletar(numero);
                 break;
             case 6:
 

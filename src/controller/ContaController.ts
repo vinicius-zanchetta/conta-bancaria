@@ -20,16 +20,29 @@ export class ContaController implements ContaRepository {
 
     procurarPorNumero(numero: number): void {
         let buscaConta: Conta | null = this.buscarNoArray(numero);
-
         (buscaConta !== null) ? buscaConta.visualizar() : console.log("A conta não foi encontrada.");
     }
 
     atualizar(conta: Conta): void {
-        throw new Error("Method not implemented.");
+        let buscaConta = this.buscarNoArray(conta.numero);
+
+        if (buscaConta !== null) {
+            console.log(`A conta com ID ${conta.numero} foi alterada com sucesso!`);
+            this.listaContas[this.listaContas.indexOf(buscaConta)] = conta;
+        } else {
+            console.log("A conta não foi encontrada!");
+        }
     }
 
     deletar(numero: number): void {
-        throw new Error("Method not implemented.");
+        let buscaConta = this.buscarNoArray(numero);
+
+        if (buscaConta !== null) {
+            console.log(`A conta com ID ${numero} foi excluída com sucesso!`);
+            this.listaContas.splice(this.listaContas.indexOf(buscaConta), 1);
+        } else {
+            console.log("A conta não foi encontrada!");
+        }
     }
 
     sacar(numero: number, valor: number): void {
@@ -52,10 +65,6 @@ export class ContaController implements ContaRepository {
     public buscarNoArray(numero: number): Conta | null {
         for (let conta of this.listaContas) {
             if (conta.numero === numero) {
-                console.log("-----");
-                console.log("conta.numero: " + conta.numero);
-                console.log("numero: " + numero);
-
                 return conta;
             }
         }
